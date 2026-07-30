@@ -1,20 +1,26 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+FounderX 2026 is the official web application for the premier entrepreneurship summit hosted by X. Built with **React 19**, **TypeScript**, **Tailwind CSS**, and **Lucide Icons**.
 
-# Run and deploy your AI Studio app
+---
 
-This contains everything you need to run your app locally.
+## 🚀 Key Features
 
-View your app in AI Studio: https://ai.studio/apps/b9298c86-6630-436f-a5ea-4793cb5070da
+- 🌟 **Keynote Speakers & Shark Tank Leaders**: Featuring industry icons including Nikhil Kamath, Vineeta Singh, Aman Gupta, and Anupam Mittal.
+- 🎯 **Event Highlights & Pitch Competitions**: Live startup pitch tracks, hackathons, VC investor speed dating, and networking lounges.
+- 🎟️ **Instant Registration System**: Seamless pass selection (₹199 All-Access Pass) with auto-generated digital delegate ticket badges.
+- ⏱️ **Live Event Countdown**: Real-time ticker counting down to event kickoff.
+- 📊 **Interactive Schedule & FAQs**: Comprehensive track timelines, filterable event schedules, and expandable FAQ accordions.
+- 📱 **Fully Responsive Layout**: Mobile-first design optimized across desktop, tablet, and mobile browsers.
 
-## Run Locally
+---
 
-**Prerequisites:**  Node.js
+## 🛠️ Tech Stack
 
+- **Frontend Framework**: React 19 + TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS
+- **Icons**: Lucide React
+- **Animations**: Motion (Framer Motion)
+- **Form Handling**: React Hook Form + Zod
+- **Effects**: Canvas Confetti
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+---
