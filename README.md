@@ -16,6 +16,7 @@ FounderX 2026 is the official web application for the premier entrepreneurship s
 ## 🛠️ Tech Stack
 
 - **Frontend Framework**: React 19 + TypeScript
+- **Backend/Database**: Firebase Firestore (for storing registration data)
 - **Build Tool**: Vite
 - **Styling**: Tailwind CSS
 - **Icons**: Lucide React
