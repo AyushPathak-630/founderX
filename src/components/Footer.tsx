@@ -23,7 +23,7 @@ export const Footer: React.FC = () => {
               </span>
             </div>
             <p className="text-slate-400 leading-relaxed">
-              "Where Students Meet Startup Leaders." Organized by the Entrepreneurship Cell at ABES Engineering College, Ghaziabad to empower campus innovators across India.
+              "Where Students Meet Startup Leaders." Organized by the Entrepreneurship Cell at ABES Engineering College, Ghaziabad.
             </p>
           </div>
 
@@ -45,8 +45,6 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2">
               <li className="text-slate-300 font-semibold">18 August 2026 • 10:00 AM</li>
               <li>Dr. Sarvapalli Radhakrishnan Auditorium, ABES Engg. College, Ghaziabad</li>
-              <li>Registration Pass: ₹199</li>
-              <li>Cap: 400 Delegates (72 Left)</li>
               <li className="text-[#F97316] font-bold">Prize Pool: ₹65,000</li>
             </ul>
           </div>

@@ -1,40 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Users, Ticket, Trophy, Briefcase, GraduationCap, Star } from 'lucide-react';
+import React from 'react';
+import { Trophy, Briefcase, GraduationCap, Star } from 'lucide-react';
 import { EVENT_DETAILS } from '../data/mockData';
-import { collection, onSnapshot, query } from 'firebase/firestore';
-import { db } from '../lib/firebase';
 
 export const StatsSection: React.FC = () => {
-  const [registered, setRegistered] = useState(0);
-
-  useEffect(() => {
-    const q = query(collection(db, 'registrations'));
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      setRegistered(snapshot.size);
-    }, (error) => {
-      console.error('Error fetching registrations count:', error);
-    });
-    return () => unsubscribe();
-  }, []);
-
-  const seatsLeft = Math.max(0, EVENT_DETAILS.capacity - registered);
-
   const stats = [
-    {
-      icon: Users,
-      label: 'Registered Students',
-      value: registered,
-      suffix: '+',
-      description: 'Aspiring student founders & developers'
-    },
-    {
-      icon: Ticket,
-      label: 'Seats Left',
-      value: seatsLeft,
-      suffix: '',
-      highlight: true,
-      description: 'Capacity capped at 400 total attendees'
-    },
     {
       icon: Trophy,
       label: 'Prize Pool',
@@ -82,35 +51,19 @@ export const StatsSection: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {stats.map((stat, idx) => {
             const Icon = stat.icon;
             return (
               <div
                 key={idx}
-                className={`p-6 rounded border transition-all duration-200 ${
-                  stat.highlight
-                    ? 'bg-slate-50 border-[#F97316] shadow-sm'
-                    : 'bg-white border-slate-200 hover:border-slate-300 shadow-sm'
-                }`}
+                className="p-6 rounded border transition-all duration-200 bg-white border-slate-200 hover:border-slate-300 shadow-sm"
               >
                 <div className="flex items-center justify-between mb-4">
-                  <div
-                    className={`p-2.5 rounded ${
-                      stat.highlight
-                        ? 'bg-[#0F172A] text-white'
-                        : 'bg-slate-100 text-[#0F172A]'
-                    }`}
-                  >
+                  <div className="p-2.5 rounded bg-slate-100 text-[#0F172A]">
                     <Icon className="h-5 w-5" />
                   </div>
-                  {stat.highlight && (
-                    <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-orange-100 text-[#F97316]">
-                      Filling Fast
-                    </span>
-                  )}
                 </div>
-
                 <div className="space-y-1">
                   <div className="font-heading text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight flex items-baseline">
                     {stat.prefix}

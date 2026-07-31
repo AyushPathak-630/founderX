@@ -1,26 +1,12 @@
 import React, { useState } from 'react';
 import { FAQS } from '../data/mockData';
-import { HelpCircle, ChevronDown, Search, MessageSquare } from 'lucide-react';
+import { HelpCircle, ChevronDown, MessageSquare } from 'lucide-react';
 
 export const FAQ: React.FC = () => {
   const [openId, setOpenId] = useState<string | null>('f1');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
-  const categories = [
-    { id: 'all', label: 'All Questions' },
-    { id: 'general', label: 'General Info' },
-    { id: 'competition', label: 'Pitch Competition' },
-    { id: 'payment', label: 'Payment & Fee' },
-    { id: 'logistics', label: 'Venue & Logistics' },
-  ];
-
-  const filteredFaqs = FAQS.filter((faq) => {
-    const matchesCategory = selectedCategory === 'all' || faq.category === selectedCategory;
-    const matchesSearch = faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          faq.answer.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  // Only show the top 3 most important questions
+  const filteredFaqs = FAQS.slice(0, 3);
 
   return (
     <section id="faq" className="py-20 bg-slate-50 text-[#0F172A] border-b border-slate-200">
@@ -37,38 +23,6 @@ export const FAQ: React.FC = () => {
           <p className="text-slate-500 text-sm sm:text-base mt-2">
             Everything you need to know about registering, pitching, and attending FounderX 2026.
           </p>
-        </div>
-
-        {/* Search Bar & Category Filters */}
-        <div className="space-y-4 mb-10">
-          <div className="relative">
-            <Search className="absolute left-4 top-3.5 h-5 w-5 text-slate-400" />
-            <input
-              type="text"
-              placeholder="Search questions (e.g. pitch rules, certificates, refund)..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white border border-slate-200 rounded pl-12 pr-4 py-3 text-sm text-[#0F172A] placeholder-slate-400 focus:outline-none focus:border-[#F97316] shadow-xs"
-            />
-          </div>
-
-          <div className="flex justify-center overflow-x-auto pb-2">
-            <div className="bg-white p-1 rounded border border-slate-200 inline-flex gap-1 shadow-xs">
-              {categories.map((cat) => (
-                <button
-                  key={cat.id}
-                  onClick={() => setSelectedCategory(cat.id)}
-                  className={`px-3 py-1.5 rounded text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
-                    selectedCategory === cat.id
-                      ? 'bg-[#0F172A] text-white shadow-xs'
-                      : 'text-slate-600 hover:text-[#0F172A] hover:bg-slate-100'
-                  }`}
-                >
-                  {cat.label}
-                </button>
-              ))}
-            </div>
-          </div>
         </div>
 
         {/* Accordion List */}

@@ -93,19 +93,6 @@ export const GuestSpeakers: React.FC = () => {
                   </div>
                 </div>
               </div>
-
-              {/* Card Footer */}
-              <div className="px-5 pb-5 pt-2">
-                <a
-                  href={speaker.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full bg-white hover:bg-slate-100 text-[#0F172A] py-2 rounded text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors border border-slate-200 shadow-xs cursor-pointer"
-                >
-                  <span>Connect on LinkedIn</span>
-                  <ExternalLink className="h-3 w-3 text-[#F97316]" />
-                </a>
-              </div>
             </div>
           ))}
         </div>

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, MapPin, Clock, ArrowRight, ShieldCheck, Sparkles, Users, Award, Play } from 'lucide-react';
 import { EVENT_DETAILS } from '../data/mockData';
-import { collection, onSnapshot, query } from 'firebase/firestore';
-import { db } from '../lib/firebase';
 
 interface HeroProps {
   onRegisterClick: () => void;
@@ -18,20 +16,6 @@ export const Hero: React.FC<HeroProps> = ({ onRegisterClick, onViewAgendaClick }
     minutes: 0,
     seconds: 0
   });
-
-  const [registered, setRegistered] = useState(0);
-
-  useEffect(() => {
-    const q = query(collection(db, 'registrations'));
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      setRegistered(snapshot.size);
-    }, (error) => {
-      console.error('Error fetching registrations count:', error);
-    });
-    return () => unsubscribe();
-  }, []);
-
-  const seatsLeft = Math.max(0, EVENT_DETAILS.capacity - registered);
 
   useEffect(() => {
     const updateCountdown = () => {
@@ -57,8 +41,14 @@ export const Hero: React.FC<HeroProps> = ({ onRegisterClick, onViewAgendaClick }
   }, []);
 
   return (
-    <section className="relative pt-28 pb-16 md:pt-36 md:pb-24 bg-slate-50 text-[#0F172A] overflow-hidden border-b border-slate-200">
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative pt-28 pb-16 md:pt-36 md:pb-24 text-[#0F172A] overflow-hidden border-b border-slate-200">
+      <div 
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop")' }}
+      >
+        <div className="absolute inset-0 bg-slate-50/80 backdrop-blur-sm"></div>
+      </div>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Hero Card Container */}
         <div className="bg-white p-8 sm:p-12 border border-slate-200 rounded-xl shadow-sm max-w-5xl mx-auto text-center space-y-8">
@@ -155,29 +145,6 @@ export const Hero: React.FC<HeroProps> = ({ onRegisterClick, onViewAgendaClick }
               <span>View Agenda & Schedule</span>
             </a>
           </div>
-
-          {/* Live Progress Bar Indicator */}
-          <div className="pt-4 max-w-xl mx-auto bg-slate-50 border border-slate-200 p-4 rounded text-left">
-            <div className="flex justify-between items-center text-xs font-bold mb-2">
-              <span className="text-slate-700 flex items-center gap-1.5">
-                <Users className="h-3.5 w-3.5 text-[#F97316]" />
-                <span>{registered} / {EVENT_DETAILS.capacity} Seats Claimed</span>
-              </span>
-              <span className="text-[#F97316] bg-orange-100 px-2 py-0.5 rounded font-bold text-[10px]">
-                {seatsLeft} SEATS LEFT
-              </span>
-            </div>
-            <div className="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
-              <div
-                className="bg-[#F97316] h-2.5 rounded-full transition-all duration-1000"
-                style={{ width: `${(registered / EVENT_DETAILS.capacity) * 100}%` }}
-              ></div>
-            </div>
-            <p className="text-[10px] text-slate-400 mt-2 text-center uppercase font-bold tracking-wider">
-              Over 82% filled • Registrations close at 400 capacity
-            </p>
-          </div>
-
         </div>
       </div>
     </section>

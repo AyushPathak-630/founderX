@@ -89,9 +89,6 @@ export const RegistrationProgress: React.FC = () => {
                 <h3 className="font-heading text-2xl sm:text-3xl font-extrabold text-[#0F172A]">
                   {seatsRemaining} Seats Remaining Before Registration Closes
                 </h3>
-                <p className="text-slate-500 text-sm mt-2 leading-relaxed">
-                  To maintain optimal networking quality and safety, the Entrepreneurship Cell has capped physical seating at 400 attendees in Dr. Sarvapalli Radhakrishnan Auditorium, ABES Engineering College, Ghaziabad.
-                </p>
               </div>
 
               {/* Linear Progress Bar */}
@@ -113,9 +110,9 @@ export const RegistrationProgress: React.FC = () => {
                 {milestones.map((ms, idx) => (
                   <div
                     key={idx}
-                    className={`p-3 rounded text-xs border ${
+                    className={`p-3 rounded text-xs border transition-all duration-500 ${
                       ms.reached
-                        ? 'bg-slate-50 border-slate-200 text-slate-800'
+                        ? 'bg-orange-50 border-orange-200 text-orange-900 shadow-[0_0_15px_rgba(249,115,22,0.3)]'
                         : 'bg-white border-slate-200 text-slate-400'
                     }`}
                   >

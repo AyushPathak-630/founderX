@@ -3,9 +3,6 @@ import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { StatsSection } from './components/StatsSection';
 import { RegistrationProgress } from './components/RegistrationProgress';
-import { RegistrationAnalytics } from './components/RegistrationAnalytics';
-import { RecentRegistrations } from './components/RecentRegistrations';
-import { AboutSection } from './components/AboutSection';
 import { WhyAttend } from './components/WhyAttend';
 import { GuestSpeakers } from './components/GuestSpeakers';
 import { EventTimeline } from './components/EventTimeline';
@@ -13,9 +10,7 @@ import { StartupCompetition } from './components/StartupCompetition';
 import { RegistrationForm } from './components/RegistrationForm';
 import { PaymentSection } from './components/PaymentSection';
 import { FAQ } from './components/FAQ';
-import { Testimonials } from './components/Testimonials';
 import { Sponsors } from './components/Sponsors';
-import { Newsletter } from './components/Newsletter';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { SuccessModal } from './components/SuccessModal';
@@ -85,18 +80,6 @@ export default function App() {
       {/* 3. Animated Statistics */}
       <StatsSection />
 
-      {/* 4. Registration Progress */}
-      <RegistrationProgress />
-
-      {/* 5. Registration Analytics */}
-      <RegistrationAnalytics />
-
-      {/* 6. Recent Registrations Feed */}
-      <RecentRegistrations />
-
-      {/* 7. About FounderX */}
-      <AboutSection />
-
       {/* 8. Why Attend Interactive Cards */}
       <WhyAttend />
 
@@ -125,17 +108,14 @@ export default function App() {
         )
       )}
 
+      {/* 4. Registration Progress */}
+      <RegistrationProgress />
+
       {/* 14. FAQ Accordion */}
       <FAQ />
 
-      {/* 15. Testimonials */}
-      <Testimonials />
-
       {/* 16. Sponsors & Partners */}
       <Sponsors />
-
-      {/* 17. Newsletter */}
-      <Newsletter />
 
       {/* 19. Contact */}
       <Contact />
