@@ -20,6 +20,8 @@ import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { SuccessModal } from './components/SuccessModal';
 import { RegistrationFormData } from './types';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { db } from './lib/firebase';
 
 export default function App() {
   const [currentStep, setCurrentStep] = useState<'form' | 'payment'>('form');
@@ -50,9 +52,23 @@ export default function App() {
     }
   };
 
-  const handlePaymentSuccess = (txId: string) => {
+  const handlePaymentSuccess = async (txId: string) => {
     setTransactionId(txId);
-    setShowSuccessModal(true);
+    
+    try {
+      if (registeredData) {
+        await addDoc(collection(db, 'registrations'), {
+          ...registeredData,
+          transactionId: txId,
+          paymentStatus: 'completed',
+          createdAt: serverTimestamp(),
+        });
+      }
+      setShowSuccessModal(true);
+    } catch (error) {
+      console.error('Error saving registration:', error);
+      alert('An error occurred while saving your registration. Please try again or contact support.');
+    }
   };
 
   return (

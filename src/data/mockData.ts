@@ -28,7 +28,7 @@ export const SPEAKERS: Speaker[] = [
     role: 'Co-Founder',
     company: 'Zerodha & True Beacon',
     avatar: '/Nikhil.png',
-    linkedin: 'https://www.linkedin.com/in/nikhilkamath/',
+    linkedin: 'https://www.linkedin.com/in/nikhilkamathcio/',
     topics: ['Building Moats & Bootstrapping', 'FinTech & Capital Markets', 'WTF Fund for Student Founders'],
     achievements: 'Co-Founder Zerodha (India\'s Largest Stockbroker) | Founder WTF Fund',
     keynoteTitle: 'Zero to One in FinTech: Building Sustainable Moats Without VC Money'
@@ -50,7 +50,7 @@ export const SPEAKERS: Speaker[] = [
     role: 'Co-Founder & CMO',
     company: 'boAt Lifestyle',
     avatar: '/Aman.png',
-    linkedin: 'https://www.linkedin.com/in/amangupta1/',
+    linkedin: 'https://www.linkedin.com/in/aman-gupta-7217a515/',
     topics: ['Brand Building for Gen Z', 'Consumer Electronics Innovation', 'Marketing Mastery'],
     achievements: 'Co-Founder boAt Lifestyle | Shark Tank India Judge | World\'s #2 Wearable Brand',
     keynoteTitle: 'Hum Bhi Bana Lenge: Crafting Cult Brands for Gen Z India'
@@ -61,7 +61,7 @@ export const SPEAKERS: Speaker[] = [
     role: 'Founder & CEO',
     company: 'Shaadi.com & People Group',
     avatar: '/Anupam.png',
-    linkedin: 'https://www.linkedin.com/in/anupammittal/',
+    linkedin: 'https://www.linkedin.com/in/anupammittal007/',
     topics: ['Angel Investing in 250+ Startups', 'Consumer Internet Platforms', 'Navigating Market Pivots'],
     achievements: 'Founder Shaadi.com & Makaan.com | Shark Tank India Judge | 250+ Angel Investments',
     keynoteTitle: 'What 250+ Investments Taught Me About Winning Founders'

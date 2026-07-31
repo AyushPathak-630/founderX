@@ -1,37 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { RECENT_REGISTRATIONS } from '../data/mockData';
-import { Registration } from '../types';
+import { collection, query, orderBy, limit, onSnapshot } from 'firebase/firestore';
+import { db } from '../lib/firebase';
 import { UserCheck, Sparkles, Clock, Building2, Lightbulb, CheckCircle2 } from 'lucide-react';
+import { formatDistanceToNow } from 'date-fns';
 
 export const RecentRegistrations: React.FC = () => {
-  const [registrations, setRegistrations] = useState<Registration[]>(RECENT_REGISTRATIONS);
+  const [registrations, setRegistrations] = useState<any[]>([]);
   const [isLiveStreaming, setIsLiveStreaming] = useState(true);
 
-  // Simulate incoming real-time registration pulse every 12 seconds
   useEffect(() => {
     if (!isLiveStreaming) return;
 
-    const sampleNames = ['Ananya Sharma', 'Rohan Gupta', 'Devika Sen', 'Karthik Raja', 'Meera Rao', 'Yash Varma'];
-    const sampleColleges = ['IIT Delhi', 'BITS Goa', 'COEP Pune', 'VJTI Mumbai', 'SRM Chennai', 'NIT Trichy'];
-    const sampleBranches = ['Computer Science', 'AI & ML', 'Electronics', 'Information Tech', 'Mechanical'];
-    const sampleYears = ['2nd Year', '3rd Year', '4th Year', '1st Year'];
+    const q = query(
+      collection(db, 'registrations'),
+      orderBy('createdAt', 'desc'),
+      limit(6)
+    );
 
-    const interval = setInterval(() => {
-      const newReg: Registration = {
-        id: `r-${Date.now()}`,
-        name: sampleNames[Math.floor(Math.random() * sampleNames.length)],
-        college: sampleColleges[Math.floor(Math.random() * sampleColleges.length)],
-        branch: sampleBranches[Math.floor(Math.random() * sampleBranches.length)],
-        year: sampleYears[Math.floor(Math.random() * sampleYears.length)],
-        timestamp: 'Just now',
-        hasStartupIdea: Math.random() > 0.4
-      };
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const data = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+        timestamp: doc.data().createdAt?.toDate ? formatDistanceToNow(doc.data().createdAt.toDate(), { addSuffix: true }) : 'Just now',
+      }));
+      setRegistrations(data);
+    }, (error) => {
+      console.error('Error fetching registrations:', error);
+    });
 
-      setRegistrations(prev => [newReg, ...prev.slice(0, 5)]);
-    }, 12000);
-
-    return () => clearInterval(interval);
+    return () => unsubscribe();
   }, [isLiveStreaming]);
+
+  if (registrations.length === 0) {
+    return null; // hide if none yet
+  }
 
   return (
     <section className="py-16 bg-white text-[#0F172A] border-b border-slate-200">
@@ -80,11 +82,11 @@ export const RecentRegistrations: React.FC = () => {
               <div className="flex items-start justify-between gap-3">
                 <div className="flex items-center gap-3">
                   <div className="h-10 w-10 rounded bg-[#0F172A] text-white flex items-center justify-center font-bold text-sm shrink-0">
-                    {reg.name.split(' ').map(n => n[0]).join('')}
+                    {reg.fullName?.split(' ').map((n: string) => n[0]).join('').substring(0, 2).toUpperCase()}
                   </div>
                   <div>
                     <div className="flex items-center gap-1.5">
-                      <h3 className="font-bold text-sm text-[#0F172A]">{reg.name}</h3>
+                      <h3 className="font-bold text-sm text-[#0F172A]">{reg.fullName}</h3>
                       <CheckCircle2 className="h-3.5 w-3.5 text-[#F97316] shrink-0" />
                     </div>
                     <p className="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
@@ -102,7 +104,7 @@ export const RecentRegistrations: React.FC = () => {
 
               <div className="mt-3 pt-3 border-t border-slate-200 flex items-center justify-between text-xs">
                 <span className="text-slate-500 font-medium">{reg.branch} • {reg.year}</span>
-                {reg.hasStartupIdea ? (
+                {reg.hasStartupIdea === 'yes' ? (
                   <span className="bg-orange-50 text-[#F97316] border border-orange-200 px-2 py-0.5 rounded font-bold text-[10px] flex items-center gap-1 uppercase tracking-wider">
                     <Lightbulb className="h-3 w-3" />
                     Idea Pitcher
@@ -121,3 +123,4 @@ export const RecentRegistrations: React.FC = () => {
     </section>
   );
 };
+

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, MapPin, Clock, ArrowRight, ShieldCheck, Sparkles, Users, Award, Play } from 'lucide-react';
 import { EVENT_DETAILS } from '../data/mockData';
+import { collection, onSnapshot, query } from 'firebase/firestore';
+import { db } from '../lib/firebase';
 
 interface HeroProps {
   onRegisterClick: () => void;
@@ -16,6 +18,20 @@ export const Hero: React.FC<HeroProps> = ({ onRegisterClick, onViewAgendaClick }
     minutes: 0,
     seconds: 0
   });
+
+  const [registered, setRegistered] = useState(0);
+
+  useEffect(() => {
+    const q = query(collection(db, 'registrations'));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setRegistered(snapshot.size);
+    }, (error) => {
+      console.error('Error fetching registrations count:', error);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const seatsLeft = Math.max(0, EVENT_DETAILS.capacity - registered);
 
   useEffect(() => {
     const updateCountdown = () => {
@@ -145,16 +161,16 @@ export const Hero: React.FC<HeroProps> = ({ onRegisterClick, onViewAgendaClick }
             <div className="flex justify-between items-center text-xs font-bold mb-2">
               <span className="text-slate-700 flex items-center gap-1.5">
                 <Users className="h-3.5 w-3.5 text-[#F97316]" />
-                <span>{EVENT_DETAILS.registered} / {EVENT_DETAILS.capacity} Seats Claimed</span>
+                <span>{registered} / {EVENT_DETAILS.capacity} Seats Claimed</span>
               </span>
               <span className="text-[#F97316] bg-orange-100 px-2 py-0.5 rounded font-bold text-[10px]">
-                {EVENT_DETAILS.seatsLeft} SEATS LEFT
+                {seatsLeft} SEATS LEFT
               </span>
             </div>
             <div className="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
               <div
                 className="bg-[#F97316] h-2.5 rounded-full transition-all duration-1000"
-                style={{ width: `${(EVENT_DETAILS.registered / EVENT_DETAILS.capacity) * 100}%` }}
+                style={{ width: `${(registered / EVENT_DETAILS.capacity) * 100}%` }}
               ></div>
             </div>
             <p className="text-[10px] text-slate-400 mt-2 text-center uppercase font-bold tracking-wider">

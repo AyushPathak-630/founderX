@@ -1,0 +1,76 @@
+{
+  "collections": [
+    {
+      "name": "registrations",
+      "description": "Stores user registration and payment information for FounderX.",
+      "fields": [
+        {
+          "name": "fullName",
+          "type": "string"
+        },
+        {
+          "name": "email",
+          "type": "string"
+        },
+        {
+          "name": "phone",
+          "type": "string"
+        },
+        {
+          "name": "college",
+          "type": "string"
+        },
+        {
+          "name": "branch",
+          "type": "string"
+        },
+        {
+          "name": "year",
+          "type": "string"
+        },
+        {
+          "name": "linkedin",
+          "type": "string",
+          "optional": true
+        },
+        {
+          "name": "hasStartupIdea",
+          "type": "string"
+        },
+        {
+          "name": "startupIdeaDetails",
+          "type": "string",
+          "optional": true
+        },
+        {
+          "name": "experienceLevel",
+          "type": "string"
+        },
+        {
+          "name": "termsAccepted",
+          "type": "boolean"
+        },
+        {
+          "name": "transactionId",
+          "type": "string",
+          "optional": true
+        },
+        {
+          "name": "paymentStatus",
+          "type": "string",
+          "description": "'pending', 'completed'"
+        },
+        {
+          "name": "createdAt",
+          "type": "timestamp"
+        }
+      ],
+      "rules": {
+        "read": "true",
+        "create": "true",
+        "update": "false",
+        "delete": "false"
+      }
+    }
+  ]
+}

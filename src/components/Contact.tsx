@@ -75,7 +75,7 @@ export const Contact: React.FC = () => {
                 <div className="flex gap-2">
                   {[
                     { icon: Instagram, label: 'Instagram', url: 'https://www.instagram.com/ecell_abesec/' },
-                    { icon: Linkedin, label: 'LinkedIn', url: 'https://www.linkedin.com/company/ecell-abesec/' },
+                    { icon: Linkedin, label: 'LinkedIn', url: 'https://www.linkedin.com/company/ecell-abes-ec/' },
                     { icon: Twitter, label: 'X/Twitter', url: 'https://twitter.com/ecell_abesec' },
                     { icon: Youtube, label: 'YouTube', url: 'https://www.youtube.com/@ecellabesec' },
                   ].map((s, i) => {

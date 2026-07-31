@@ -1,20 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Users, Ticket, Trophy, Briefcase, GraduationCap, Star } from 'lucide-react';
 import { EVENT_DETAILS } from '../data/mockData';
+import { collection, onSnapshot, query } from 'firebase/firestore';
+import { db } from '../lib/firebase';
 
 export const StatsSection: React.FC = () => {
+  const [registered, setRegistered] = useState(0);
+
+  useEffect(() => {
+    const q = query(collection(db, 'registrations'));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setRegistered(snapshot.size);
+    }, (error) => {
+      console.error('Error fetching registrations count:', error);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const seatsLeft = Math.max(0, EVENT_DETAILS.capacity - registered);
+
   const stats = [
     {
       icon: Users,
       label: 'Registered Students',
-      value: EVENT_DETAILS.registered,
+      value: registered,
       suffix: '+',
       description: 'Aspiring student founders & developers'
     },
     {
       icon: Ticket,
       label: 'Seats Left',
-      value: EVENT_DETAILS.seatsLeft,
+      value: seatsLeft,
       suffix: '',
       highlight: true,
       description: 'Capacity capped at 400 total attendees'

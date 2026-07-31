@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { EVENT_DETAILS } from '../data/mockData';
+import { collection, onSnapshot, query } from 'firebase/firestore';
+import { db } from '../lib/firebase';
 import { Users, TicketCheck, ShieldAlert, CheckCircle2 } from 'lucide-react';
 
 export const RegistrationProgress: React.FC = () => {
-  const percentage = Math.round((EVENT_DETAILS.registered / EVENT_DETAILS.capacity) * 100);
+  const [registered, setRegistered] = useState(0);
+
+  useEffect(() => {
+    const q = query(collection(db, 'registrations'));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setRegistered(snapshot.size);
+    }, (error) => {
+      console.error('Error fetching registrations count:', error);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const percentage = Math.round((registered / EVENT_DETAILS.capacity) * 100);
   const strokeDashoffset = 283 - (283 * percentage) / 100;
+  const seatsRemaining = Math.max(0, EVENT_DETAILS.capacity - registered);
 
   const milestones = [
-    { count: 100, label: 'Early Bird Opened', reached: true, date: '15 July 2026' },
-    { count: 200, label: '50% Capacity Crossed', reached: true, date: '22 July 2026' },
-    { count: 300, label: '75% Capacity Crossed', reached: true, date: '28 July 2026' },
-    { count: 400, label: 'Housefull (Cap Limit)', reached: false, date: 'Target: 10 Aug' },
+    { count: 100, label: 'Early Bird Opened', reached: registered >= 100, date: '15 July 2026' },
+    { count: 200, label: '50% Capacity Crossed', reached: registered >= 200, date: '22 July 2026' },
+    { count: 300, label: '75% Capacity Crossed', reached: registered >= 300, date: '28 July 2026' },
+    { count: 400, label: 'Housefull (Cap Limit)', reached: registered >= 400, date: 'Target: 10 Aug' },
   ];
 
   return (
@@ -60,7 +75,7 @@ export const RegistrationProgress: React.FC = () => {
 
               <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-slate-600">
                 <TicketCheck className="h-4 w-4 text-[#F97316]" />
-                <span>{EVENT_DETAILS.registered} Confirmed / {EVENT_DETAILS.capacity} Maximum Capacity</span>
+                <span>{registered} Confirmed / {EVENT_DETAILS.capacity} Maximum Capacity</span>
               </div>
             </div>
 
@@ -72,7 +87,7 @@ export const RegistrationProgress: React.FC = () => {
                   <span>Real-Time Registration Counter</span>
                 </div>
                 <h3 className="font-heading text-2xl sm:text-3xl font-extrabold text-[#0F172A]">
-                  72 Seats Remaining Before Registration Closes
+                  {seatsRemaining} Seats Remaining Before Registration Closes
                 </h3>
                 <p className="text-slate-500 text-sm mt-2 leading-relaxed">
                   To maintain optimal networking quality and safety, the Entrepreneurship Cell has capped physical seating at 400 attendees in Dr. Sarvapalli Radhakrishnan Auditorium, ABES Engineering College, Ghaziabad.
@@ -83,7 +98,7 @@ export const RegistrationProgress: React.FC = () => {
               <div className="space-y-2">
                 <div className="flex justify-between text-xs font-bold uppercase text-slate-500 tracking-wider">
                   <span>Current Occupancy</span>
-                  <span className="text-[#F97316]">{EVENT_DETAILS.registered} / 400 Seats</span>
+                  <span className="text-[#F97316]">{registered} / 400 Seats</span>
                 </div>
                 <div className="w-full bg-slate-100 rounded-full h-3 p-0.5 border border-slate-200">
                   <div
