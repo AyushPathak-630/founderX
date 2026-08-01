@@ -49,7 +49,7 @@ export const Contact: React.FC = () => {
               </div>
               <div>
                 <p className="text-xs font-bold uppercase text-slate-400">Venue Address</p>
-                <p className="font-semibold text-slate-800 text-base">Dr. Sarvapalli Radhakrishnan Auditorium, ABES Engineering College, Ghaziabad</p>
+                <p className="font-semibold text-slate-800 text-base">Vishwakarma Block, ABES Engineering College, Ghaziabad</p>
               </div>
             </div>
           </div>
