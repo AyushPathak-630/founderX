@@ -1,14 +1,16 @@
-FounderX 2026 is the official web application for the premier entrepreneurship summit hosted by X. Built with **React 19**, **TypeScript**, **Tailwind CSS**, and **Lucide Icons**.
+# FounderX 2026 — E-Cell ABESEC Flagship Entrepreneurship Summit
+
+FounderX 2026 is the official web platform for the premier entrepreneurship summit hosted by **E-Cell ABESEC** (ABES Engineering College, Ghaziabad). Built with **React 19**, **TypeScript**, **Tailwind CSS v4**, and **Lucide Icons**.
 
 ---
 
 ## 🚀 Key Features
 
-- 🌟 **Keynote Speakers & Shark Tank Leaders**: Featuring industry icons including Nikhil Kamath, Vineeta Singh, Aman Gupta, and Anupam Mittal.
+- 🌟 **Keynote Speakers & Shark Tank Leaders**: Showcasing industry leaders including Nikhil Kamath, Vineeta Singh, Aman Gupta, and Anupam Mittal.
 - 🎯 **Event Highlights & Pitch Competitions**: Live startup pitch tracks, hackathons, VC investor speed dating, and networking lounges.
 - 🎟️ **Instant Registration System**: Seamless pass selection (₹199 All-Access Pass) with auto-generated digital delegate ticket badges.
 - ⏱️ **Live Event Countdown**: Real-time ticker counting down to event kickoff.
-- 📊 **Interactive Schedule & FAQs**: Comprehensive track timelines, filterable event schedules, and expandable FAQ accordions.
+- 📊 **Interactive Schedule & FAQs**: Comprehensive track timelines, filterable event schedules, and expandable FAQ accordion.
 - 📱 **Fully Responsive Layout**: Mobile-first design optimized across desktop, tablet, and mobile browsers.
 
 ---
@@ -16,8 +18,9 @@ FounderX 2026 is the official web application for the premier entrepreneurship s
 ## 🛠️ Tech Stack
 
 - **Frontend Framework**: React 19 + TypeScript
+- **Backend : Firebase, Firestore Database
 - **Build Tool**: Vite
-- **Styling**: Tailwind CSS
+- **Styling**: Tailwind CSS v4
 - **Icons**: Lucide React
 - **Animations**: Motion (Framer Motion)
 - **Form Handling**: React Hook Form + Zod
